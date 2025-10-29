@@ -1,0 +1,49 @@
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import LandingPage from "./pages/LandingPage";
+import LoginPage from "./pages/LoginPage";
+import AdminHomePage from "./pages/AdminHomePage";
+import UserHomePage from "./pages/UserHomePage";
+import CreatePage from "./pages/CreatePage";
+import CustomerNavbar from "./components/CustomerNavbar";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import AdminOrdersPage from "./pages/AdminOrdersPage";
+
+function App() {
+  return (
+  
+      <Routes>
+        {/* Landing Page */}
+        <Route path="/" element={<LandingPage />} />
+
+        {/* Login Page */}
+        <Route path="/login" element={<LoginPage />} />
+
+        {/* User Home */}
+        <Route path="/userhomepage" element={<UserHomePage />} />
+
+        {/* Admin Home */}
+        <Route path="/adminhomepage" element={<AdminHomePage />} />
+
+        {/* Create (for Admins) */}
+        <Route path="/create" element={<CreatePage />} />
+        <Route path="/admin/create" element={<CreatePage />} />
+
+        {/* Customer Navbar (debug/demo) */}
+        <Route path="/CustomerNavbar" element={<CustomerNavbar />} />
+
+        {/* Forgot / Reset Password */}
+        <Route path="/admin/forgot-password" element={<ForgotPasswordPage />} />
+        
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
+
+        {/* Admin Orders */}
+        <Route path="/adminorders" element={<AdminOrdersPage />} />
+      </Routes>
+    
+  );
+}
+
+export default App;
