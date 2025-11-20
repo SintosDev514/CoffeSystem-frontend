@@ -129,7 +129,7 @@ const ChangePass = () => {
               <FormControl id="oldPassword" isRequired>
                 <FormLabel>Old Password</FormLabel>
                 <Input
-                  type="password"
+                  type="text"
                   value={oldPassword}
                   onChange={(e) => setOldPassword(e.target.value)}
                   placeholder="Enter old password"
@@ -139,7 +139,7 @@ const ChangePass = () => {
               <FormControl id="newPassword" isRequired>
                 <FormLabel>New Password</FormLabel>
                 <Input
-                  type="password"
+                  type="text"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   placeholder="Enter new password"
@@ -149,7 +149,7 @@ const ChangePass = () => {
               <FormControl id="confirmPassword" isRequired>
                 <FormLabel>Confirm New Password</FormLabel>
                 <Input
-                  type="password"
+                  type="text"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Confirm new password"
