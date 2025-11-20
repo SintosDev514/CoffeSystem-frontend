@@ -10,39 +10,42 @@ import CustomerNavbar from "./components/CustomerNavbar";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import AdminOrdersPage from "./pages/AdminOrdersPage";
+import ChangePass from "./pages/ChangePass";
 
 function App() {
   return (
-  
-      <Routes>
-        {/* Landing Page */}
-        <Route path="/" element={<LandingPage />} />
+    <Routes>
+      {/* Landing Page */}
+      <Route path="/" element={<LandingPage />} />
 
-        {/* Login Page */}
-        <Route path="/login" element={<LoginPage />} />
+      {/* Login Page */}
+      <Route path="/login" element={<LoginPage />} />
 
-        {/* User Home */}
-        <Route path="/userhomepage" element={<UserHomePage />} />
+      {/* Chnange Pass*/}
 
-        {/* Admin Home */}
-        <Route path="/adminhomepage" element={<AdminHomePage />} />
+      <Route path="/changepassword" element={<ChangePass />} />
 
-        {/* Create (for Admins) */}
-        <Route path="/create" element={<CreatePage />} />
-        <Route path="/admin/create" element={<CreatePage />} />
+      {/* User Home */}
+      <Route path="/userhomepage" element={<UserHomePage />} />
 
-        {/* Customer Navbar (debug/demo) */}
-        <Route path="/CustomerNavbar" element={<CustomerNavbar />} />
+      {/* Admin Home */}
+      <Route path="/adminhomepage" element={<AdminHomePage />} />
 
-        {/* Forgot / Reset Password */}
-        <Route path="/admin/forgot-password" element={<ForgotPasswordPage />} />
-        
-        <Route path="/reset-password" element={<ResetPasswordPage />} />
+      {/* Create (for Admins) */}
+      <Route path="/create" element={<CreatePage />} />
+      <Route path="/admin/create" element={<CreatePage />} />
 
-        {/* Admin Orders */}
-        <Route path="/adminorders" element={<AdminOrdersPage />} />
-      </Routes>
-    
+      {/* Customer Navbar (debug/demo) */}
+      <Route path="/CustomerNavbar" element={<CustomerNavbar />} />
+
+      {/* Forgot / Reset Password */}
+      <Route path="/admin/forgot-password" element={<ForgotPasswordPage />} />
+
+      <Route path="/reset-password" element={<ResetPasswordPage />} />
+
+      {/* Admin Orders */}
+      <Route path="/adminorders" element={<AdminOrdersPage />} />
+    </Routes>
   );
 }
 

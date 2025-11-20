@@ -26,7 +26,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { FiCoffee, FiArrowLeft, FiUser, FiShield } from "react-icons/fi";
 
-
 const COFFEE_SHOP_THEME = {
   primary: {
     darkBrown: "#5D4037",
@@ -72,7 +71,6 @@ const LoginPage = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-
   const handleCustomerSubmit = (e) => {
     e.preventDefault();
     if (!form.customerId) {
@@ -97,7 +95,6 @@ const LoginPage = () => {
     navigate("/userhomepage");
   };
 
-
   const handleAdminSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -117,8 +114,8 @@ const LoginPage = () => {
 
       localStorage.setItem("ADMIN_TOKEN", data.token);
       toast({
-        title: "Welcome back, Barista!",
-        description: "Ready to manage the coffee shop ☕",
+        title: "Welcome back, Admin!",
+        description: "Ready to manage the coffee shop?",
         status: "success",
         duration: 3000,
         isClosable: true,
@@ -196,7 +193,6 @@ const LoginPage = () => {
                   </Text>
                 </VStack>
 
-                
                 <HStack
                   bg={COFFEE_SHOP_THEME.primary.lightCream}
                   p={1}
@@ -247,7 +243,6 @@ const LoginPage = () => {
                 </HStack>
               </VStack>
 
-              
               {role === "user" && (
                 <VStack
                   spacing={4}
@@ -255,14 +250,12 @@ const LoginPage = () => {
                   onSubmit={(e) => {
                     e.preventDefault();
 
-                    
                     const generatedId =
                       "CUST-" +
                       Date.now() +
                       "-" +
                       Math.floor(Math.random() * 1000);
 
-                    
                     localStorage.setItem("customerId", generatedId);
 
                     toast({
@@ -301,84 +294,83 @@ const LoginPage = () => {
                 </VStack>
               )}
 
-            
-{role === "admin" && (
-  <VStack spacing={4} as="form" onSubmit={handleAdminSubmit}>
-    <FormControl isRequired>
-      <FormLabel
-        color={COFFEE_SHOP_THEME.primary.darkBrown}
-        fontSize="sm"
-      >
-        Barista Email
-      </FormLabel>
-      <Input
-        placeholder="Enter your barista email"
-        type="email"
-        name="email"
-        value={form.email}
-        onChange={handleChange}
-        bg={COFFEE_SHOP_THEME.primary.white}
-        borderColor={COFFEE_SHOP_THEME.primary.mediumGray}
-        borderRadius="lg"
-      />
-    </FormControl>
-    <FormControl isRequired>
-      <FormLabel
-        color={COFFEE_SHOP_THEME.primary.darkBrown}
-        fontSize="sm"
-      >
-        Password
-      </FormLabel>
-      <InputGroup>
-        <Input
-          placeholder="Enter your password"
-          type={showPassword ? "text" : "password"}
-          name="password"
-          value={form.password}
-          onChange={handleChange}
-          bg={COFFEE_SHOP_THEME.primary.white}
-          borderColor={COFFEE_SHOP_THEME.primary.mediumGray}
-          borderRadius="lg"
-        />
-        <InputRightElement>
-          <IconButton
-            aria-label={showPassword ? "Hide password" : "Show password"}
-            icon={showPassword ? <ViewOffIcon /> : <ViewIcon />}
-            size="sm"
-            onClick={() => setShowPassword(!showPassword)}
-            variant="ghost"
-            color={COFFEE_SHOP_THEME.primary.mediumBrown}
-          />
-        </InputRightElement>
-      </InputGroup>
+              {role === "admin" && (
+                <VStack spacing={4} as="form" onSubmit={handleAdminSubmit}>
+                  <FormControl isRequired>
+                    <FormLabel
+                      color={COFFEE_SHOP_THEME.primary.darkBrown}
+                      fontSize="sm"
+                    >
+                      Barista Email
+                    </FormLabel>
+                    <Input
+                      placeholder="Enter your barista email"
+                      type="email"
+                      name="email"
+                      value={form.email}
+                      onChange={handleChange}
+                      bg={COFFEE_SHOP_THEME.primary.white}
+                      borderColor={COFFEE_SHOP_THEME.primary.mediumGray}
+                      borderRadius="lg"
+                    />
+                  </FormControl>
+                  <FormControl isRequired>
+                    <FormLabel
+                      color={COFFEE_SHOP_THEME.primary.darkBrown}
+                      fontSize="sm"
+                    >
+                      Password
+                    </FormLabel>
+                    <InputGroup>
+                      <Input
+                        placeholder="Enter your password"
+                        type={showPassword ? "text" : "password"}
+                        name="password"
+                        value={form.password}
+                        onChange={handleChange}
+                        bg={COFFEE_SHOP_THEME.primary.white}
+                        borderColor={COFFEE_SHOP_THEME.primary.mediumGray}
+                        borderRadius="lg"
+                      />
+                      <InputRightElement>
+                        <IconButton
+                          aria-label={
+                            showPassword ? "Hide password" : "Show password"
+                          }
+                          icon={showPassword ? <ViewOffIcon /> : <ViewIcon />}
+                          size="sm"
+                          onClick={() => setShowPassword(!showPassword)}
+                          variant="ghost"
+                          color={COFFEE_SHOP_THEME.primary.mediumBrown}
+                        />
+                      </InputRightElement>
+                    </InputGroup>
 
-      
-      <Text
-        fontSize="sm"
-        color="blue.500"
-        cursor="pointer"
-        mt={2}  // spacing from password input
-        onClick={() => navigate("/admin/forgot-password")}
-        alignSelf="flex-end"
-      >
-        Forgot Password?
-      </Text>
-    </FormControl>
-    <Button
-      w="full"
-      size="lg"
-      type="submit"
-      isLoading={isLoading}
-      bg={COFFEE_SHOP_THEME.gradients.premium}
-      color={COFFEE_SHOP_THEME.primary.cream}
-      borderRadius="lg"
-      py={6}
-    >
-      Sign In as Barista
-    </Button>
-  </VStack>
-)}
-
+                    <Text
+                      fontSize="sm"
+                      color="blue.500"
+                      cursor="pointer"
+                      mt={2} // spacing from password input
+                      onClick={() => navigate("/admin/forgot-password")}
+                      alignSelf="flex-end"
+                    >
+                      Forgot Password?
+                    </Text>
+                  </FormControl>
+                  <Button
+                    w="full"
+                    size="lg"
+                    type="submit"
+                    isLoading={isLoading}
+                    bg={COFFEE_SHOP_THEME.gradients.premium}
+                    color={COFFEE_SHOP_THEME.primary.cream}
+                    borderRadius="lg"
+                    py={6}
+                  >
+                    Sign In as Barista
+                  </Button>
+                </VStack>
+              )}
 
               <Divider
                 borderColor={COFFEE_SHOP_THEME.primary.mediumGray}

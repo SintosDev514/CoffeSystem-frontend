@@ -14,7 +14,7 @@ import {
   MenuDivider,
   IconButton,
   useToast,
-  Badge
+  Badge,
 } from "@chakra-ui/react";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
@@ -24,7 +24,7 @@ import {
   FaChartBar,
   FaBell,
   FaCog,
-  FaArrowLeft
+  FaArrowLeft,
 } from "react-icons/fa";
 
 const COFFEE_SHOP_THEME = {
@@ -71,8 +71,9 @@ const Navbar = ({ role }) => {
 
   const isActiveRoute = (path) => location.pathname === path;
   const handleProfile = () => navigate("/admin/profile");
-  const handleSettings = () => navigate("/admin/settings");
-  const onCreatePage = location.pathname === "/create" || location.pathname === "/admin/create";
+  const handleChangePassword = () => navigate("/changepassword"); /////////
+  const onCreatePage =
+    location.pathname === "/create" || location.pathname === "/admin/create";
 
   const handleBack = () => {
     if (role === "admin" || location.pathname.startsWith("/admin")) {
@@ -100,7 +101,13 @@ const Navbar = ({ role }) => {
       zIndex="sticky"
       boxShadow="0 4px 12px rgba(0,0,0,0.15)"
     >
-      <Flex align="center" justify="space-between" maxW="1400px" mx="auto" gap={4}>
+      <Flex
+        align="center"
+        justify="space-between"
+        maxW="1400px"
+        mx="auto"
+        gap={4}
+      >
         <Flex
           align="center"
           gap={3}
@@ -139,34 +146,26 @@ const Navbar = ({ role }) => {
           )}
         </Flex>
 
-        <HStack spacing={2} flex={1} justify="center" display={{ base: "none", md: "flex" }}>
+        <HStack
+          spacing={2}
+          flex={1}
+          justify="center"
+          display={{ base: "none", md: "flex" }}
+        >
           {!onCreatePage ? (
             <>
-              <Button
-                variant="ghost"
-                color={isActiveRoute("/") ? accentColor : textColor}
-                onClick={() => navigate("/")}
-                size="md"
-                fontWeight={isActiveRoute("/") ? "semibold" : "normal"}
-                _hover={{
-                  bg: hoverBg,
-                  color: COFFEE_SHOP_THEME.primary.white,
-                  transform: "translateY(-1px)",
-                }}
-                leftIcon={<FaChartBar />}
-                transition="all 0.2s"
-              >
-                Overview
-              </Button>
-
               {role === "admin" && (
                 <>
                   <Button
                     variant="ghost"
-                    color={isActiveRoute("/adminhomepage") ? accentColor : textColor}
+                    color={
+                      isActiveRoute("/adminhomepage") ? accentColor : textColor
+                    }
                     onClick={() => navigate("/adminhomepage")}
                     size="md"
-                    fontWeight={isActiveRoute("/adminhomepage") ? "semibold" : "normal"}
+                    fontWeight={
+                      isActiveRoute("/adminhomepage") ? "semibold" : "normal"
+                    }
                     _hover={{
                       bg: hoverBg,
                       color: COFFEE_SHOP_THEME.primary.white,
@@ -180,10 +179,14 @@ const Navbar = ({ role }) => {
 
                   <Button
                     variant="ghost"
-                    color={isActiveRoute("/adminorders") ? accentColor : textColor}
+                    color={
+                      isActiveRoute("/adminorders") ? accentColor : textColor
+                    }
                     onClick={() => navigate("/adminorders")}
                     size="md"
-                    fontWeight={isActiveRoute("/adminorders") ? "semibold" : "normal"}
+                    fontWeight={
+                      isActiveRoute("/adminorders") ? "semibold" : "normal"
+                    }
                     _hover={{
                       bg: hoverBg,
                       color: COFFEE_SHOP_THEME.primary.white,
@@ -239,11 +242,11 @@ const Navbar = ({ role }) => {
             color={secondaryText}
           />
           <IconButton
-            aria-label="Settings"
+            aria-label="Change Pasword"
             icon={<FaCog />}
             variant="ghost"
             color={secondaryText}
-            onClick={handleSettings}
+            onClick={handleChangePassword}
           />
 
           <Menu>
@@ -293,16 +296,19 @@ const Navbar = ({ role }) => {
               </MenuItem>
               <MenuItem
                 icon={<FaCog />}
-                onClick={handleSettings}
+                onClick={handleChangePassword}
                 _hover={{ bg: hoverBg, color: COFFEE_SHOP_THEME.primary.white }}
               >
-                Settings
+                Change Password
               </MenuItem>
               <MenuDivider borderColor={borderColor} />
               <MenuItem
                 icon={<FaSignOutAlt />}
                 onClick={handleLogout}
-                _hover={{ bg: "#b33a3a", color: COFFEE_SHOP_THEME.primary.white }}
+                _hover={{
+                  bg: "#b33a3a",
+                  color: COFFEE_SHOP_THEME.primary.white,
+                }}
               >
                 Sign Out
               </MenuItem>
@@ -321,37 +327,40 @@ const Navbar = ({ role }) => {
       >
         {!onCreatePage ? (
           <>
-            <Button
-              variant="ghost"
-              color={isActiveRoute("/") ? accentColor : textColor}
-              onClick={() => navigate("/")}
-              size="sm"
-              fontWeight={isActiveRoute("/") ? "semibold" : "normal"}
-              _hover={{ bg: hoverBg, color: COFFEE_SHOP_THEME.primary.white }}
-            >
-              Overview
-            </Button>
-
             {role === "admin" && (
               <>
                 <Button
                   variant="ghost"
-                  color={isActiveRoute("/adminhomepage") ? accentColor : textColor}
+                  color={
+                    isActiveRoute("/adminhomepage") ? accentColor : textColor
+                  }
                   onClick={() => navigate("/adminhomepage")}
                   size="sm"
-                  fontWeight={isActiveRoute("/adminhomepage") ? "semibold" : "normal"}
-                  _hover={{ bg: hoverBg, color: COFFEE_SHOP_THEME.primary.white }}
+                  fontWeight={
+                    isActiveRoute("/adminhomepage") ? "semibold" : "normal"
+                  }
+                  _hover={{
+                    bg: hoverBg,
+                    color: COFFEE_SHOP_THEME.primary.white,
+                  }}
                 >
                   Dashboard
                 </Button>
 
                 <Button
                   variant="ghost"
-                  color={isActiveRoute("/adminorders") ? accentColor : textColor}
+                  color={
+                    isActiveRoute("/adminorders") ? accentColor : textColor
+                  }
                   onClick={() => navigate("/adminorders")}
                   size="sm"
-                  fontWeight={isActiveRoute("/adminorders") ? "semibold" : "normal"}
-                  _hover={{ bg: hoverBg, color: COFFEE_SHOP_THEME.primary.white }}
+                  fontWeight={
+                    isActiveRoute("/adminorders") ? "semibold" : "normal"
+                  }
+                  _hover={{
+                    bg: hoverBg,
+                    color: COFFEE_SHOP_THEME.primary.white,
+                  }}
                 >
                   Orders
                 </Button>
