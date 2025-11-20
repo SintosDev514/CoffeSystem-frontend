@@ -9,6 +9,10 @@ import {
   VStack,
   useToast,
 } from "@chakra-ui/react";
+
+const API_URL = import.meta.env.VITE_API_URL;
+console.log("API_URL =", API_URL);
+
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
@@ -55,20 +59,17 @@ const ChangePass = () => {
         return;
       }
 
-      const response = await fetch(
-        "http://localhost:5000/api/admin/change-password",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            oldPassword,
-            newPassword,
-          }),
-        }
-      );
+      const response = await fetch(`${API_URL}/api/admin/change-password`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          oldPassword,
+          newPassword,
+        }),
+      });
 
       const data = await response.json();
 
