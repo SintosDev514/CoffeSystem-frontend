@@ -92,7 +92,9 @@ const FloatingCoffees = () => {
           top={`${Math.random() * 100}%`}
           left={`${Math.random() * 100}%`}
           filter="blur(0.5px)"
-          animation={`floatCoffee ${6 + Math.random() * 6}s ease-in-out infinite`}
+          animation={`floatCoffee ${
+            6 + Math.random() * 6
+          }s ease-in-out infinite`}
           style={{ animationDelay: `${Math.random() * 5}s` }}
         />
       ))}
@@ -118,19 +120,6 @@ const UserHomePage = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [customerId, setCustomerId] = useState("");
   const toast = useToast();
-
-  const handleLogout = () => {
-    clearCustomerId();
-    localStorage.removeItem("cart");
-    toast({
-      title: "Logged Out",
-      description: "Your session has been cleared. Goodbye ☕",
-      status: "info",
-      duration: 3000,
-      isClosable: true,
-    });
-    navigate("/login");
-  };
 
   const showNotification = useCallback(
     (title, description, status = "info") => {
@@ -209,7 +198,11 @@ const UserHomePage = () => {
 
   const handleCheckout = async () => {
     if (cart.length === 0) {
-      showNotification("Cart Empty", "Please add items before checkout.", "warning");
+      showNotification(
+        "Cart Empty",
+        "Please add items before checkout.",
+        "warning"
+      );
       return;
     }
 
@@ -232,7 +225,11 @@ const UserHomePage = () => {
       const checkoutUrl = data?.checkoutUrl;
 
       if (checkoutUrl) {
-        showNotification("Redirecting", "Opening PayMongo checkout...", "success");
+        showNotification(
+          "Redirecting",
+          "Opening PayMongo checkout...",
+          "success"
+        );
         window.location.href = checkoutUrl;
       } else {
         throw new Error("No checkout URL returned");
@@ -252,7 +249,13 @@ const UserHomePage = () => {
     <Box bg={COFFEE_SHOP_THEME.cream} minH="100vh" position="relative">
       <FloatingCoffees />
 
-      <Box position="fixed" top={0} width="100%" zIndex={1000} bg={COFFEE_SHOP_THEME.cream}>
+      <Box
+        position="fixed"
+        top={0}
+        width="100%"
+        zIndex={1000}
+        bg={COFFEE_SHOP_THEME.cream}
+      >
         <Flex justifyContent="space-between" alignItems="center" px={4}>
           <Box flex={1}>
             <CustomerNavbar
@@ -262,16 +265,6 @@ const UserHomePage = () => {
               onOpenCart={() => setIsCartOpen(true)}
             />
           </Box>
-          <Button
-            size="sm"
-            variant="ghost"
-            colorScheme="red"
-            onClick={handleLogout}
-            leftIcon={<FiUser />}
-            ml={2}
-          >
-            Logout
-          </Button>
         </Flex>
       </Box>
 
@@ -298,11 +291,19 @@ const UserHomePage = () => {
           </style>
 
           <Container maxW="container.md">
-            <Heading color={COFFEE_SHOP_THEME.brown} fontSize={{ base: "2xl", md: "3xl" }}>
+            <Heading
+              color={COFFEE_SHOP_THEME.brown}
+              fontSize={{ base: "2xl", md: "3xl" }}
+            >
               Welcome to BrewTrack ☕
             </Heading>
-            <Text mt={3} color={COFFEE_SHOP_THEME.text} fontSize={{ base: "sm", md: "lg" }}>
-              Where every cup tells a story. Discover, sip, and enjoy your next favorite brew.
+            <Text
+              mt={3}
+              color={COFFEE_SHOP_THEME.text}
+              fontSize={{ base: "sm", md: "lg" }}
+            >
+              Where every cup tells a story. Discover, sip, and enjoy your next
+              favorite brew.
             </Text>
 
             {customerId && (
@@ -351,7 +352,13 @@ const UserHomePage = () => {
         </Box>
 
         {/* Products Grid */}
-        <Container maxW="container.xl" py={{ base: 8, md: 12 }} px={{ base: 4, md: 8 }} zIndex={1} position="relative">
+        <Container
+          maxW="container.xl"
+          py={{ base: 8, md: 12 }}
+          px={{ base: 4, md: 8 }}
+          zIndex={1}
+          position="relative"
+        >
           {filteredProducts.length === 0 ? (
             <Center py={20}>
               <VStack spacing={4}>
@@ -415,11 +422,19 @@ const UserHomePage = () => {
       </Box>
 
       {/* Cart Drawer */}
-      <Drawer isOpen={isCartOpen} placement="right" onClose={() => setIsCartOpen(false)} size="sm">
+      <Drawer
+        isOpen={isCartOpen}
+        placement="right"
+        onClose={() => setIsCartOpen(false)}
+        size="sm"
+      >
         <DrawerOverlay />
         <DrawerContent borderRadius="xl 0 0 xl">
           <DrawerCloseButton />
-          <DrawerHeader borderBottom="1px solid #E0C097" bg={COFFEE_SHOP_THEME.latte}>
+          <DrawerHeader
+            borderBottom="1px solid #E0C097"
+            bg={COFFEE_SHOP_THEME.latte}
+          >
             Your Cart
           </DrawerHeader>
           <DrawerBody>
@@ -430,7 +445,13 @@ const UserHomePage = () => {
             ) : (
               <VStack align="stretch" spacing={4}>
                 {cart.map((item) => (
-                  <Box key={item._id} p={3} bg="white" borderRadius="lg" shadow="sm">
+                  <Box
+                    key={item._id}
+                    p={3}
+                    bg="white"
+                    borderRadius="lg"
+                    shadow="sm"
+                  >
                     <Flex justify="space-between" align="center">
                       <VStack align="start" spacing={0}>
                         <Text fontWeight="medium">{item.name}</Text>
@@ -439,10 +460,23 @@ const UserHomePage = () => {
                         </Text>
                       </VStack>
                       <HStack spacing={1}>
-                        <IconButton size="sm" icon={<FiMinus />} onClick={() => decreaseQuantity(item._id)} />
+                        <IconButton
+                          size="sm"
+                          icon={<FiMinus />}
+                          onClick={() => decreaseQuantity(item._id)}
+                        />
                         <Text fontSize="sm">{item.quantity}</Text>
-                        <IconButton size="sm" icon={<FiPlus />} onClick={() => increaseQuantity(item._id)} />
-                        <IconButton size="sm" colorScheme="red" icon={<FiTrash2 />} onClick={() => removeFromCart(item._id)} />
+                        <IconButton
+                          size="sm"
+                          icon={<FiPlus />}
+                          onClick={() => increaseQuantity(item._id)}
+                        />
+                        <IconButton
+                          size="sm"
+                          colorScheme="red"
+                          icon={<FiTrash2 />}
+                          onClick={() => removeFromCart(item._id)}
+                        />
                       </HStack>
                     </Flex>
                   </Box>
@@ -459,7 +493,12 @@ const UserHomePage = () => {
           </DrawerBody>
           <DrawerFooter>
             {cart.length > 0 && (
-              <Button w="full" colorScheme="green" leftIcon={<FiCreditCard />} onClick={handleCheckout}>
+              <Button
+                w="full"
+                colorScheme="green"
+                leftIcon={<FiCreditCard />}
+                onClick={handleCheckout}
+              >
                 Proceed to Checkout
               </Button>
             )}
