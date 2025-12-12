@@ -59,7 +59,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const toast = useToast();
-  const isMobile = useBreakpointValue({ base: true, md: false });
+  //const isMobile = useBreakpointValue({ base: true, md: false });
 
   useEffect(() => {
     const query = new URLSearchParams(location.search);

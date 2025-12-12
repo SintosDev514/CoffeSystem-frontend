@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import CryptoJS from "crypto-js";
 import { useProductStore } from "../store/product";
-import { clearCustomerId } from "../utils/sessionUtils";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import {
   Box,
   Heading,
@@ -114,7 +113,7 @@ const FloatingCoffees = () => {
 
 const UserHomePage = () => {
   const { fetchProductsForUsers, products: rawProducts } = useProductStore();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
