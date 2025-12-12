@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
-import { getCustomerId, setCustomerId, generateCustomerId } from "../utils/sessionUtils";
 import {
   Box,
   Button,
@@ -74,16 +73,18 @@ const LoginPage = () => {
 
   useEffect(() => {
     // Check if a customerId already exists in localStorage
-    let existingId = getCustomerId();
+    let existingId = localStorage.getItem("customerId");
 
     if (!existingId) {
       // If not, generate a new one
-      existingId = generateCustomerId();
-      setCustomerId(existingId);
+      const generatedId =
+        "CUST-" + Date.now() + "-" + Math.floor(Math.random() * 1000);
+      localStorage.setItem("customerId", generatedId);
+      existingId = generatedId;
 
       toast({
         title: "Welcome to BrewFlow!",
-        description: `Your Customer ID is ${existingId}. Keep it safe to track your orders ☕`,
+        description: `Your Customer ID is ${generatedId}. Keep it safe to track your orders ☕`,
         status: "success",
         duration: 4000,
         isClosable: true,
@@ -92,12 +93,29 @@ const LoginPage = () => {
 
     // Update the form state if you want to use it in your form
     setForm((prev) => ({ ...prev, customerId: existingId }));
-  }, [toast]);
-
+  }, []); // Empty dependency array = runs only once on mount
 
   const handleCustomerSubmit = (e) => {
     e.preventDefault();
-    // Customer ID is already stored from useEffect, just navigate
+    if (!form.customerId) {
+      toast({
+        title: "Customer ID required",
+        description: "Please enter your Customer ID to continue",
+        status: "warning",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    localStorage.setItem("customerId", form.customerId);
+    toast({
+      title: "Welcome to BrewFlow!",
+      description: "Your coffee journey begins now ☕",
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+    });
     navigate("/userhomepage");
   };
 
@@ -142,8 +160,7 @@ const LoginPage = () => {
 
   const switchRole = (newRole) => {
     setRole(newRole);
-    // Don't clear customerId when switching roles - it should persist
-    setForm({ email: "", password: "", customerId: form.customerId });
+    setForm({ email: "", password: "", customerId: "" });
   };
 
   return (
