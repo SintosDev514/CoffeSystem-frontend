@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useCallback } from "react";
 import CryptoJS from "crypto-js";
 import { useProductStore } from "../store/product";
+import { clearCustomerId } from "../utils/sessionUtils";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Heading,
@@ -110,11 +112,25 @@ const FloatingCoffees = () => {
 
 const UserHomePage = () => {
   const { fetchProductsForUsers, products: rawProducts } = useProductStore();
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [customerId, setCustomerId] = useState("");
   const toast = useToast();
+
+  const handleLogout = () => {
+    clearCustomerId();
+    localStorage.removeItem("cart");
+    toast({
+      title: "Logged Out",
+      description: "Your session has been cleared. Goodbye ☕",
+      status: "info",
+      duration: 3000,
+      isClosable: true,
+    });
+    navigate("/login");
+  };
 
   const showNotification = useCallback(
     (title, description, status = "info") => {
@@ -237,12 +253,26 @@ const UserHomePage = () => {
       <FloatingCoffees />
 
       <Box position="fixed" top={0} width="100%" zIndex={1000} bg={COFFEE_SHOP_THEME.cream}>
-        <CustomerNavbar
-          search={searchQuery}
-          setSearch={setSearchQuery}
-          cartCount={cart.length}
-          onOpenCart={() => setIsCartOpen(true)}
-        />
+        <Flex justifyContent="space-between" alignItems="center" px={4}>
+          <Box flex={1}>
+            <CustomerNavbar
+              search={searchQuery}
+              setSearch={setSearchQuery}
+              cartCount={cart.length}
+              onOpenCart={() => setIsCartOpen(true)}
+            />
+          </Box>
+          <Button
+            size="sm"
+            variant="ghost"
+            colorScheme="red"
+            onClick={handleLogout}
+            leftIcon={<FiUser />}
+            ml={2}
+          >
+            Logout
+          </Button>
+        </Flex>
       </Box>
 
       <Box pt="80px">

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+import { getCustomerId, setCustomerId, generateCustomerId } from "../utils/sessionUtils";
 import {
   Box,
   Button,
@@ -71,27 +72,32 @@ const LoginPage = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleCustomerSubmit = (e) => {
-    e.preventDefault();
-    if (!form.customerId) {
+  useEffect(() => {
+    // Check if a customerId already exists in localStorage
+    let existingId = getCustomerId();
+
+    if (!existingId) {
+      // If not, generate a new one
+      existingId = generateCustomerId();
+      setCustomerId(existingId);
+
       toast({
-        title: "Customer ID required",
-        description: "Please enter your Customer ID to continue",
-        status: "warning",
-        duration: 3000,
+        title: "Welcome to BrewFlow!",
+        description: `Your Customer ID is ${existingId}. Keep it safe to track your orders ☕`,
+        status: "success",
+        duration: 4000,
         isClosable: true,
       });
-      return;
     }
 
-    localStorage.setItem("customerId", form.customerId);
-    toast({
-      title: "Welcome to BrewFlow!",
-      description: "Your coffee journey begins now ☕",
-      status: "success",
-      duration: 3000,
-      isClosable: true,
-    });
+    // Update the form state if you want to use it in your form
+    setForm((prev) => ({ ...prev, customerId: existingId }));
+  }, [toast]);
+
+
+  const handleCustomerSubmit = (e) => {
+    e.preventDefault();
+    // Customer ID is already stored from useEffect, just navigate
     navigate("/userhomepage");
   };
 
@@ -136,7 +142,8 @@ const LoginPage = () => {
 
   const switchRole = (newRole) => {
     setRole(newRole);
-    setForm({ email: "", password: "", customerId: "" });
+    // Don't clear customerId when switching roles - it should persist
+    setForm({ email: "", password: "", customerId: form.customerId });
   };
 
   return (
