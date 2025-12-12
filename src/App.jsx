@@ -14,38 +14,40 @@ import ChangePass from "./pages/ChangePass";
 
 function App() {
   return (
-    <Routes>
-      {/* Landing Page */}
-      <Route path="/" element={<LandingPage />} />
+    <Router>
+      <Routes>
+        {/* Landing Page */}
+        <Route path="/" element={<LandingPage />} />
 
-      {/* Login Page */}
-      <Route path="/login" element={<LoginPage />} />
+        {/* Login Page */}
+        <Route path="/login" element={<LoginPage />} />
 
-      {/* Chnange Pass*/}
+        {/* Chnange Pass*/}
 
-      <Route path="/changepassword" element={<ChangePass />} />
+        <Route path="/changepassword" element={<ChangePass />} />
 
-      {/* User Home */}
-      <Route path="/userhomepage" element={<UserHomePage />} />
+        {/* User Home */}
+        <Route path="/userhomepage" element={<UserHomePage />} />
 
-      {/* Admin Home */}
-      <Route path="/adminhomepage" element={<AdminHomePage />} />
+        {/* Admin Home */}
+        <Route path="/adminhomepage" element={<AdminHomePage />} />
 
-      {/* Create (for Admins) */}
-      <Route path="/create" element={<CreatePage />} />
-      <Route path="/admin/create" element={<CreatePage />} />
+        {/* Create (for Admins) */}
+        <Route path="/create" element={<CreatePage />} />
+        <Route path="/admin/create" element={<CreatePage />} />
 
-      {/* Customer Navbar (debug/demo) */}
-      <Route path="/CustomerNavbar" element={<CustomerNavbar />} />
+        {/* Customer Navbar (debug/demo) */}
+        <Route path="/CustomerNavbar" element={<CustomerNavbar />} />
 
-      {/* Forgot / Reset Password */}
-      <Route path="/admin/forgot-password" element={<ForgotPasswordPage />} />
+        {/* Forgot / Reset Password */}
+        <Route path="/admin/forgot-password" element={<ForgotPasswordPage />} />
 
-      <Route path="/reset-password" element={<ResetPasswordPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
 
-      {/* Admin Orders */}
-      <Route path="/adminorders" element={<AdminOrdersPage />} />
-    </Routes>
+        {/* Admin Orders */}
+        <Route path="/adminorders" element={<AdminOrdersPage />} />
+      </Routes>
+    </Router>
   );
 }
 
