@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+import { getApiUrl } from "../config";
 import {
   Box,
   Button,
@@ -78,6 +78,7 @@ const ResetPasswordPage = () => {
 
     try {
       setIsLoading(true);
+      const API_URL = getApiUrl();
       const res = await fetch(`${API_URL}/api/auth/update-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
